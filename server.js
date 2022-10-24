@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const noteRoute = require("./routes/noteRoute");
+const userRoute = require("./routes/userRoute");
+const employeeRoute = require("./routes/employeeRoute");
 
 dotenv.config({ path: "./config.env" });
 
@@ -13,7 +14,7 @@ const DB_URL = process.env.DB_URL;
 mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    autoIndex: true,
   })
   .then(() => {
     console.log("Successfully connected to the database mongoDB Atlas Server");
@@ -24,11 +25,9 @@ mongoose
   });
 
 app.use(express.json());
-app.use("/api/v1/", noteRoute);
 
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to Note taking application - Week06 Exercise</h1>");
-});
+app.use("/api/user/", userRoute);
+app.use("/api/emp/", employeeRoute);
 
 app.listen(PORT, () => {
   console.log("Server is listening on port " + PORT);
