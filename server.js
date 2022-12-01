@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/userRoute");
 const employeeRoute = require("./routes/employeeRoute");
+const cors = require("cors");
 
 dotenv.config({ path: "./config.env" });
 
@@ -24,6 +25,7 @@ mongoose
     process.exit();
   });
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/user/", userRoute);
