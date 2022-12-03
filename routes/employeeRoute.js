@@ -9,7 +9,7 @@ const {
   deleteEmployee,
 } = require("../controllers/empController");
 
-routes.get("/employees", protect, getAllEmployees);
+routes.get("/employees", getAllEmployees);
 
 routes.post("/employees", protect, createEmployee);
 
